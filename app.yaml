@@ -5,11 +5,11 @@ metadata:
   labels:
     app: nginx
 spec:
-  type: NodePort  # Changed from LoadBalancer to NodePort
+  type: NodePort  # Keep NodePort type
   ports:
-  - port: 80
-    targetPort: 80
-    nodePort: 32499
+    - port: 80
+      targetPort: 80
+      # Removed nodePort to let Kubernetes assign it automatically
   selector:
     app: nginx
 ---
@@ -44,7 +44,6 @@ spec:
         volumeMounts:
         - name: html-volume
           mountPath: /usr/share/nginx/html
-        command: [ "nginx", "-g", "daemon off;" ]
       volumes:
       - name: html-volume
         emptyDir: {}
