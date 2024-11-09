@@ -9,7 +9,7 @@ spec:
   ports:
   - port: 80
     targetPort: 80
-    nodePort: 32499  
+    nodePort: 32499
   selector:
     app: nginx
 ---
@@ -44,6 +44,7 @@ spec:
         volumeMounts:
         - name: html-volume
           mountPath: /usr/share/nginx/html
+        command: [ "nginx", "-g", "daemon off;" ]
       volumes:
       - name: html-volume
         emptyDir: {}
